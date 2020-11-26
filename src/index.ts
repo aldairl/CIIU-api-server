@@ -28,4 +28,4 @@ server.start(() => {
     console.log(`server is running on port ${server.port}`)
 });
 
-// readFile();
+readFile();
