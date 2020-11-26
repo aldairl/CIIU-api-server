@@ -20,7 +20,7 @@ export const readFile = () => {
                 const divisionClass = Object.keys(classComplete['divisiones']); //get arary names of divisions
                 const divisionClassComplete = classComplete['divisiones']; //Object complete, contain divisions object
 
-                const classTosave = { clase: nameClass, title: titleClass };
+                const classTosave = { _id: nameClass + titleClass, clase: nameClass, title: titleClass };
 
                 const classSaved: any = await economicCreate.createEconomicClase(classTosave);
 
@@ -31,7 +31,7 @@ export const readFile = () => {
                     const subDivisions = Object.keys(divisionClassComplete[nameDivision].subdivisiones); //array names of subDivisions
                     const subDivisionComplete = divisionClassComplete[nameDivision].subdivisiones; //object complete subdivions, contain subdivions objects
 
-                    const divisionTosave = { clase: nameDivision, title: titleDivision, economicClass: classSaved._id };
+                    const divisionTosave = { _id: nameDivision + titleDivision, clase: nameDivision, title: titleDivision, economicClass: classSaved._id };
                     const divisionSaved: any = await economicCreate.createEconomicDivision(divisionTosave);
 
                     for (let s = 0; s < subDivisions.length; s++) {
@@ -41,7 +41,7 @@ export const readFile = () => {
                         const activities = Object.keys(subDivisionComplete[nameSubDivision].actividades);
                         const activitiesComplete = subDivisionComplete[nameSubDivision].actividades;
 
-                        const subDivisionToSave = { clase: nameSubDivision, title: titleSubDivision, division: divisionSaved._id };
+                        const subDivisionToSave = { _id: nameDivision + titleSubDivision, clase: nameSubDivision, title: titleSubDivision, division: divisionSaved._id };
                         const subDivisionSaved: any = await economicCreate.createEconomicSubDivision(subDivisionToSave);
 
                         for (let a = 0; a < activities.length; a++) {
@@ -49,7 +49,7 @@ export const readFile = () => {
                             const nameActivity = activities[a];
                             const titleActivity = activitiesComplete[nameActivity];
 
-                            const activityToSave = { code: nameActivity, title: titleActivity, subdivision: subDivisionSaved._id };
+                            const activityToSave = { _id: nameActivity + titleActivity, code: nameActivity, title: titleActivity, subdivision: subDivisionSaved._id };
                             const activitySaved = await economicCreate.createEconomicActivity(activityToSave);
                         }
 

@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
 const EconomicSubDivision = new Schema({
+    _id:String,
     clase: String,
     title: String,
     division: { type: Schema.Types.ObjectId, ref: 'economicDivision' },

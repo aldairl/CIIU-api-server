@@ -7,6 +7,8 @@ routerEconomicActivities.get('/', economicActivities.getEconomicActivities);
 
 routerEconomicActivities.post('/', economicActivities.createEconomicActivities);
 
+routerEconomicActivities.post('/search', economicActivities.SearchEconomicActivityByName);
+
 routerEconomicActivities.post('/delete', economicActivities.DeleteEconomicActivityById);
 
 export default routerEconomicActivities;

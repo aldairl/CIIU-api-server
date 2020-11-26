@@ -4,15 +4,17 @@ const economicSubDivisionModel = require('../models/Economic-subdivision.model')
 const economicActivitiesModel = require('../models/Economic-activities.model');
 
 class EconomicCreate {
-    public async createEconomicClase(body: { clase: string, title: string }) {
+    public async createEconomicClase(body: { _id: string, clase: string, title: string }) {
 
         return new Promise(async (resolve, reject) => {
             try {
 
-                const claseToSave = new economicClasesModel(body);
-                const claseSaved = await claseToSave.save();
-                resolve(claseSaved);
+                const conditions = { _id: body._id }
+                    , update = body
+                    , options = { multi: true, upsert: true };
 
+                const claseSaved = await economicClasesModel.updateOne(conditions, update, options);
+                resolve(claseSaved);
 
             } catch (error) {
                 console.log(error);
@@ -21,13 +23,15 @@ class EconomicCreate {
         })
     }
 
-    public async createEconomicDivision(body: { clase: string, title: string, economicClass: string }) {
+    public async createEconomicDivision(body: { _id: string, clase: string, title: string, economicClass: string }) {
 
         return new Promise(async (resolve, reject) => {
             try {
+                const conditions = { _id: body._id }
+                    , update = body
+                    , options = { multi: true, upsert: true };
 
-                const divisionToSave = new economicDivisionModel(body);
-                const divisionSaved = await divisionToSave.save();
+                const divisionSaved = await economicDivisionModel.updateOne(conditions, update, options);
                 resolve(divisionSaved);
 
             } catch (error) {
@@ -37,13 +41,15 @@ class EconomicCreate {
         })
     }
 
-    public async createEconomicSubDivision(body: { clase: string, title: string, division: string }) {
+    public async createEconomicSubDivision(body: { _id: string, clase: string, title: string, division: string }) {
 
         return new Promise(async (resolve, reject) => {
             try {
+                const conditions = { _id: body._id }
+                    , update = body
+                    , options = { multi: true, upsert: true };
 
-                const subDivisionToSave = new economicSubDivisionModel(body);
-                const subDivisionSaved = await subDivisionToSave.save();
+                const subDivisionSaved = await economicSubDivisionModel.updateOne(conditions, update, options);
                 resolve(subDivisionSaved);
 
             } catch (error) {
@@ -53,13 +59,16 @@ class EconomicCreate {
         })
     }
 
-    public async createEconomicActivity(body: { code: string, title: string, subdivision: string }) {
+    public async createEconomicActivity(body: { _id: string, code: string, title: string, subdivision: string }) {
 
         return new Promise(async (resolve, reject) => {
             try {
 
-                const ActivityToSave = new economicActivitiesModel(body);
-                const ActivitySaved = await ActivityToSave.save();
+                const conditions = { _id: body._id }
+                    , update = body
+                    , options = { multi: true, upsert: true };
+
+                const ActivitySaved = await economicActivitiesModel.updateOne(conditions, update, options);
                 resolve(ActivitySaved);
 
             } catch (error) {

@@ -46,6 +46,40 @@ class EconomicActivities {
         }
     }
 
+    public async SearchEconomicActivityByName(req: Request, res: Response) {
+
+        try {
+            const { search } = req.body;
+
+            let economicActivities = null;
+
+            if (search) {
+                if (Number(search)) {
+
+                    economicActivities = await economicActivitiesModel.find({ "code": { $regex: `.*${search}`, $options: "i" } }, { code: 1, title: 1 });
+                } else {
+                    economicActivities = await economicActivitiesModel.find({ "title": { $regex: `.*${search}`, $options: "i" } }, { code: 1, title: 1 });
+                }
+
+            } else {
+                economicActivities = await economicActivitiesModel.find({}, { code: 1, title: 1 }).limit(5);
+            }
+
+            res.send({
+                error: null,
+                success: true,
+                data: economicActivities
+            });
+
+        } catch (error) {
+            res.send({
+                error,
+                success: false,
+                data: null
+            })
+        }
+    }
+
     public async DeleteEconomicActivityById(req: Request, res: Response) {
 
         try {
