@@ -6,5 +6,10 @@ a simple server with Typescript and nodejs
 npm install
 npm run dev
 ```
+
+##Api
+``` bash
+Get api/economic-activities
+```
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
