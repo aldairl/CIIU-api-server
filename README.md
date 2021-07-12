@@ -17,5 +17,9 @@ Get api/economic-activities
 * Install mongoDB
 * install dependencies
 * run 
+
+# URL
+https://d2ohnq7lz00nlu.cloudfront.net/api/economic-activities
+
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
